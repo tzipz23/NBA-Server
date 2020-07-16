@@ -1,4 +1,4 @@
-class UsersController < ApplicationController
+class UserController < ApplicationController
 
     before_action :authorize_request, except: [:create, :login]
 
@@ -9,8 +9,8 @@ class UsersController < ApplicationController
     end
   
     def create
-      
-      @user = User.new(first_name: params[:user][:first_name], last_name: params[:user][:last_name], username: params[:user][:username], password: params[:password])
+      # byebug
+      @user = User.new(first_name: params[:user][:first_name], last_name: params[:user][:last_name], user_name: params[:username], password: params[:password])
       if @user.save
           token = User.encode(@user)
           render json: {token: token, user_id: @user.id}, status: :created 
@@ -29,9 +29,10 @@ class UsersController < ApplicationController
   
     def login
       
-      creds  = {username: params[:user][:username], password: params[:password]}
-      
+      creds  = {username: params[:username], password: params[:password]}
+      # byebug
       @user = User.check_user(creds)
+      
       if (@user) 
         token = User.encode(@user)
         render json: {token: token, user_id: @user.id}, status: :ok
