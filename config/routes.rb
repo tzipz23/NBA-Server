@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :players
   resources :articles
   resources :profile
   resources :teams

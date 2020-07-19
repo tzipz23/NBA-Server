@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_16_183040) do
+ActiveRecord::Schema.define(version: 2020_07_18_151055) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,6 +43,36 @@ ActiveRecord::Schema.define(version: 2020_07_16_183040) do
   create_table "keywords", force: :cascade do |t|
     t.integer "user_id"
     t.string "word"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "players", force: :cascade do |t|
+    t.string "full_name"
+    t.string "real_team_id"
+    t.string "jersey_number"
+    t.string "position"
+    t.string "height"
+    t.string "weight"
+    t.string "birthdate"
+    t.string "college"
+    t.string "player_image", default: "https://alumni.crg.eu/sites/default/files/default_images/default-picture_0_0.png"
+    t.string "team_draft_id"
+    t.string "league"
+    t.string "team_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "teams", force: :cascade do |t|
+    t.string "name"
+    t.string "market"
+    t.string "alias"
+    t.string "venue"
+    t.string "url_reference"
+    t.string "image"
+    t.string "sport_title"
+    t.string "team_reference"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
