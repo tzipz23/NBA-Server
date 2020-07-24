@@ -5,12 +5,15 @@ Rails.application.routes.draw do
   resources :profile
   resources :teams
   resources :media
+  resources :user_players
+  resources :user_teams
   
 
   get 'auth', to: 'auth#validate_token'
-  post 'users', to: 'user#create'
+  post 'user', to: 'user#create'
   post 'login', to: 'user#login'
   get 'user/create'
+  get 'user/index'
   get 'user/udpdate'
   get 'user/destroy'
 
