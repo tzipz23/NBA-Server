@@ -13,12 +13,15 @@ require 'rest-client'
 
 TEAM_API_KEY = ENV['team_api_key']
 
-User.destroy_all
+
 Team.destroy_all
 Player.destroy_all
+User.destroy_all
+UserPlayer.destroy_all
+UserTeam.destroy_all
 
-user1 = User.create(first_name:'Tomazye', last_name:'Anderson', user_name:'tzipz', password:'z')
-
+user1 = User.create(first_name:'Tomazye', last_name:'Anderson', user_name:'tzipz', password:'z', image: "https://media.gettyimages.com/photos/january-12-springbrook-g-tomazye-anderson-drives-the-lane-for-two-picture-id136930044")
+# https://avatars3.githubusercontent.com/u/33858127?s=460&u=86b0afa70fbb45a4d176637abe08d13ef20c610a&v=4
 teams = RestClient.get(TEAM_API_KEY)
 teams_array = JSON.parse(teams)["conferences"]
 teams_array.each do |conference|
@@ -116,4 +119,31 @@ Player.create(
     )
 end
 
+# player1 = Player.all.first
+# player2 = Player.all.last
+# player3 = Player.all[2]
+# player4 = Player.all[3]
+# player5 = Player.all[4]
+# player6 = Player.all[5]
+
+
+# user_player = UserPlayer.create(user_id: user1.id, player_id: player1.id)
+# user_player2 = UserPlayer.create(user_id: user1.id, player_id: player2.id)
+# user_player3 = UserPlayer.create(user_id: user1.id, player_id: player3.id)
+# user_player4 = UserPlayer.create(user_id: user1.id, player_id: player4.id)
+# user_player5 = UserPlayer.create(user_id: user1.id, player_id: player5.id)
+# user_player6 = UserPlayer.create(user_id: user1.id, player_id: player6.id)
+
+# team1 = Team.all.first
+# team2 = Team.all.last
+# team3 = Team.all[2]
+# team4 = Team.all[3]
+# team5 = Team.all[4]
+# team6 = Team.all[5]
+
+# user_team1 = UserTeam.create(user_id: user1.id, team_id: team1.id)
+# user_team2= UserTeam.create(user_id: user1.id, team_id: team2.id)
+# user_team3 = UserTeam.create(user_id: user1.id, team_id: team3.id)
+# user_team4 = UserTeam.create(user_id: user1.id, team_id: team4.id)
+# user_team5 = UserTeam.create(user_id: user1.id, team_id: team5.id)
 

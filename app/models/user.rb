@@ -5,12 +5,21 @@ class User < ApplicationRecord
     has_many :user_joins
 
     has_many :articles, through: :user_articles
-    has_many :commments, through: :articles
-    has_many :interactions, through: :commments
+    # has_many :commments, through: :articles
+    has_many :interactions
+    has_many :user_players, dependent: :destroy
+    has_many :players, through: :user_players
+    has_many :user_teams, dependent: :destroy
+    has_many :teams, through: :user_teams
 
     has_many :keywords
 
     mount_uploader :avatar, AvatarUploader
+
+    has_many :followed, :class_name => 'UserJoin', 
+    :foreign_key => 'follower_id'
+    has_many :followers, :class_name => 'UserJoin', 
+    :foreign_key => 'followed_id'
 
     def self.check_user(credentials)
         @user = self.find_by(user_name: credentials[:username]).try(:authenticate, credentials[:password])

@@ -2,11 +2,14 @@ Rails.application.routes.draw do
 
   resources :players
   resources :articles
+  
   resources :profile
   resources :teams
   resources :media
+  resources :user
   resources :user_players
   resources :user_teams
+  resources :user_articles
   
 
   get 'auth', to: 'auth#validate_token'
