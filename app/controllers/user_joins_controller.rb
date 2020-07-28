@@ -1,6 +1,7 @@
 class UserJoinsController < ApplicationController
     
     def index
+        render json: UserJoin.all.as_json(include: [:user])
     end
 
     def show
@@ -8,7 +9,7 @@ class UserJoinsController < ApplicationController
 
     def destroy
     end
-    
+
 end
 
 

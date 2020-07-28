@@ -12,6 +12,7 @@ class UserController < ApplicationController
     end
   
     def show
+      # byebug
       render json: User.find_by(id: params[:id]).as_json(include: [:user_players, :user_teams, :articles])
     end
   
@@ -30,7 +31,7 @@ class UserController < ApplicationController
   
     def update
       user = User.find(params[:id])
-      user.update(name: params[:name], image: params[:image])
+      user.update( image: params[:image])
       render json: user
     end
   
