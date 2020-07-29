@@ -12,8 +12,9 @@ class UserController < ApplicationController
     end
   
     def show
-      # byebug
-      render json: User.find_by(id: params[:id]).as_json(include: [:user_players, :user_teams, :articles])
+      user = User.find_by(id: params[:id])
+      render json: user.as_json(include: [:user_players, :user_teams, :articles])
+
     end
   
     def create
@@ -33,6 +34,14 @@ class UserController < ApplicationController
       user = User.find(params[:id])
       user.update( image: params[:image])
       render json: user
+    end
+
+    def followers
+      
+      user = User.find(params[:id])
+      followers_list = UserJoin.all.find_all do |uj| uj.followed_id == user.id end
+      render json: followers_list
+      
     end
   
     def destroy

@@ -1,7 +1,7 @@
 class UserJoinsController < ApplicationController
     
     def index
-        render json: UserJoin.all, include: [:user]
+        render json: UserJoin.all
     end
 
     def create
@@ -15,12 +15,17 @@ class UserJoinsController < ApplicationController
     end
 
     def show
+        render json: UserJoin.find(params[:id])
     end
 
     def destroy
-        unfriend = UserJoin.find(params[:id])
-        unfriend.destroy
-        render json: unfriend
+        unfriend = UserJoin.find_by(follower_id: params[:follower_id], followed_id: params[:followed_id])
+        if unfriend.destroy
+            render json: unfriend
+        else
+            render json: {error: true, message: "Unfollow unseccessful"}, status: 400
+        end
+        
     end
 
 end

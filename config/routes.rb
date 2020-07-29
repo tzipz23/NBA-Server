@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
   resources :players
-  resources :articles
+  # resources :articles
   
   resources :profile
   resources :teams
@@ -9,14 +9,19 @@ Rails.application.routes.draw do
   resources :user
   resources :user_players
   resources :user_teams
-  resources :user_articles
-  
+  # resources :user_articles  
 
   get 'auth', to: 'auth#validate_token'
+
+  get 'follow', to: 'user_joins#index'
+  get 'follow/:id/followers', to: 'user#followers'
+  get 'follow/:id', to: 'user_joins#show'
   post 'follow', to: 'user_joins#create'
   delete 'follow', to: 'user_joins#destroy'
+  
   post 'user', to: 'user#create'
   post 'login', to: 'user#login'
+
   get 'user/create'
   get 'user/index'
   get 'user/udpdate'
@@ -24,12 +29,6 @@ Rails.application.routes.draw do
 
   # get 'articles', to: 'job_listing#index'
   # post 'listing', to: 'job_listing#create'
-  
- 
-  
-  # get 'search', to: 'search#api'
-  # get 'user/index'
-  # get 'user/show'
   
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
