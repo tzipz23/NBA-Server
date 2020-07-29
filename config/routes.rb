@@ -13,6 +13,8 @@ Rails.application.routes.draw do
   
 
   get 'auth', to: 'auth#validate_token'
+  post 'follow', to: 'user_joins#create'
+  delete 'follow', to: 'user_joins#destroy'
   post 'user', to: 'user#create'
   post 'login', to: 'user#login'
   get 'user/create'
