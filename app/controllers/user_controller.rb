@@ -37,11 +37,15 @@ class UserController < ApplicationController
     end
 
     def followers
-      
       user = User.find(params[:id])
       followers_list = UserJoin.all.find_all do |uj| uj.followed_id == user.id end
       render json: followers_list
-      
+    end
+
+    def following
+      user = User.find(params[:id])
+      following_list = UserJoin.all.find_all do |uj| uj.follower_id == user.id end
+      render json: following_list
     end
   
     def destroy
